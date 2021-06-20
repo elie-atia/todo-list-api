@@ -1,0 +1,4 @@
+ ..)install react router:  npm i react-router-dom
+ ..)see in the firebase Auth-Development project -> Authentication, that all the users appears.
+  * a good things is that all the users are just in the development and not in the Product.
+  ..) add all the routing codes...
