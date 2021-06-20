@@ -22,6 +22,30 @@ class Todo extends React.Component {
 		}
 	}
 
+	observer = db.collection('Tasks').onSnapshot(snapshot => {
+		//   alert(`Received doc snapshot: ${docSnapshot}`)
+		  let changes = snapshot.docChanges;
+		  changes.forEach(change => {
+			// alert(change.doc.data().title)
+			// alert(change.type)
+			const newItem = {
+				id: change.doc.data().id ,
+				title: change.doc.data().title,
+				completed: change.doc.data().completed ,
+				confidentiality : change.doc.data().confidentiality
+			}
+			this.setState({
+				items: [...this.state.items,newItem] ,
+				id: uuid(),
+				item: '',
+				editItem: false,
+				confidentiality : ''
+			})
+			
+		});
+		}, err => {
+		  console.log(`Encountered error: ${err}`);
+		});
 	handleChange = event => {
 		this.setState({
 			item: event.target.value
@@ -45,24 +69,24 @@ class Todo extends React.Component {
 			completed: false, 
 			confidentiality : confidentiality
 		});
-		const newItem = {
-			id: this.state.id,
-			title: this.state.item,
-			completed: false ,
-			confidentiality : confidentiality
-		}
+		// const newItem = {
+		// 	id: this.state.id,
+		// 	title: this.state.item,
+		// 	completed: false ,
+		// 	confidentiality : confidentiality
+		// }
 
-		const updatedItems = [...this.state.items, newItem]
+		// const updatedItems = [...this.state.items, newItem]
 
-		if (this.state.item.length > 0) {
-			this.setState({
-				items: updatedItems,
-				id: uuid(),
-				item: '',
-				editItem: false, 
-			})
+		// if (this.state.item.length > 0) {
+		// 	this.setState({
+		// 		items: updatedItems,
+		// 		id: uuid(),
+		// 		item: '',
+		// 		editItem: false, 
+		// 	})
 
-		}
+		// }
 	}
 
 	updateTodosToShow = string => {
@@ -152,7 +176,7 @@ class Todo extends React.Component {
 						}
 						<h2>${items.length}  </h2>
 						<TodoList
-							caller = "Login"
+							caller = {this.props.caller}
 							items={items}
 							filterDoneTasks={this.filterDoneTasks}
 							clearList={this.clearList}

@@ -34,7 +34,7 @@ export default function Dashboard() {
   }
   return (
     <>
-      <Todo/>
+      <Todo caller = "Dashboard"/>
       <Card>
         <Card.Body>
           {/* <h2 className="text-center mb-4">Profile</h2> */}

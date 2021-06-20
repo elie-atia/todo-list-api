@@ -1,5 +1,9 @@
 import React, { Component, Fragment } from 'react'
 import TodoItem from './TodoItem'
+import firebase from 'firebase/app';
+
+
+            
 
 export default class TodoList extends Component {
     render() {
@@ -12,7 +16,6 @@ export default class TodoList extends Component {
             handleDoneTask,
             handleDeleteDoneTasks
         } = this.props
-
         return (
             <Fragment>
                 <h3 className="text-center">
@@ -67,7 +70,8 @@ export default class TodoList extends Component {
                                 )
                             })
                         }
-
+                        {
+                		this.props.caller == "Login" ? '' :
                         <div className="row mt-4">
                             <div className="col-md-6">
                                 <button 
@@ -88,10 +92,11 @@ export default class TodoList extends Component {
                                 </button>
                             </div>
                         </div>
+                    }     
                     </ul>
                 }
             </Fragment>
         )
     }
 }
-//test for commit
+//test for commit                   
