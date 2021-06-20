@@ -7,6 +7,7 @@ export default class TodoInput extends Component {
         const {item, handleChange, handleSubmit, editItem} = this.props  
         
         return (
+           
             <div className="card card-body my-3">
                 <form onSubmit={handleSubmit}>
                     <div className="input-group">
@@ -16,7 +17,7 @@ export default class TodoInput extends Component {
                             </div>
                         </div>
 
-                        <input
+                        <input  
                             type="text"
                             className="form-control"
                             placeholder="New Todo"
